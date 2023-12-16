@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "919334958315",
+    "project_id": "ajprelawan",
+    "storage_bucket": "ajprelawan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919334958315:android:f50fdc3b143e95da383aae",
+        "android_client_info": {
+          "package_name": "com.jonacenter.ajprelawan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG4t9FVJMNVRshxaEM4vhLT_4d72lE5yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

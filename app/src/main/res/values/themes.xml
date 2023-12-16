@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AjpRelawan" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/green</item>
+    </style>
+
+    <style name="Theme.AjpRelawan" parent="Base.Theme.AjpRelawan" />
+
+
+    <style name="TextAppearence.TextInputLayout" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="colorControlActivated">@color/grey_80</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="colorControlNormal">@color/grey_80</item>
+        <item name="android:textColorPrimary">@color/grey_80</item>
+        <item name="colorControlHighlight">@color/grey_80</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.MaterialComponents.Body1">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/grey_80</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/grey_80</item>
+        <item name="colorControlNormal">@color/colorDefaultTv</item>
+        <item name="colorControlActivated">@color/grey_80</item>
+    </style>
+</resources>
