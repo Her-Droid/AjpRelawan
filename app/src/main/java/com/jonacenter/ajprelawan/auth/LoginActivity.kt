@@ -22,7 +22,6 @@ import com.jonacenter.ajprelawan.MainActivity
 import com.jonacenter.ajprelawan.R
 import com.jonacenter.ajprelawan.viewRelawan.WebViewActivity
 
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences

@@ -2,6 +2,18 @@ package com.jonacenter.ajprelawan.api
 
 object Config {
     const val DATABASE_URL = "https://ajprelawan-default-rtdb.firebaseio.com/"
-    const val cekDpt = "https://ahmadfaisalr.id/"
+    const val URL_DPT = "https://ahmadfaisalr.id/"
     const val webView = "https://ajprelawan.000webhostapp.com/"
+    const val URL = "https://nahini.vercel.app/"
+
+    const val demoCekDpt = "democekdpt/"
+
+    const val api = "api/"
+
+    const val cekDataDpt = "$demoCekDpt$api/pemilih"
+
+    const val addData = "addData"
+
+    const val getData = "getData"
+
 }

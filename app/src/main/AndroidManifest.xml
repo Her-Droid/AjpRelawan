@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+`q
     <queries>
         <package android:name="com.whatsapp" />
     </queries>

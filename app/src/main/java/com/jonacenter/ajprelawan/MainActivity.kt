@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import com.google.firebase.database.FirebaseDatabase
 import com.jonacenter.ajprelawan.auth.LoginActivity
 import com.jonacenter.ajprelawan.viewRelawan.ManualActivity
 import com.jonacenter.ajprelawan.viewRelawan.ResultRelawanActivity
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         btnInputManualScrape = findViewById(R.id.btnInputManualScrape)
         btnCheckResult = findViewById(R.id.btnCheckResult)
         btnLogout = findViewById(R.id.tvLogout)
+        // Inside MainActivity.onCreate()
+
+        val btnDeleteDataRequest: AppCompatButton = findViewById(R.id.btnDeleteAccount)
+
+
 
         sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
 
@@ -70,11 +76,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ResultRelawanActivity::class.java)
             startActivity(intent)
         }
+
         val btnHelpDesk: AppCompatButton = findViewById(R.id.btnHelpDesk)
 
         btnHelpDesk.setOnClickListener {
             openWhatsAppChat("82258821877")
         }
+
     }
     private fun openWhatsAppChat(phoneNumber: String) {
         val whatsappIntent = Intent(Intent.ACTION_VIEW)
@@ -111,6 +119,27 @@ class MainActivity : AppCompatActivity() {
         btnCheckResult.setBackgroundResource(R.drawable.button_background_false)
         btnCheckResult.setTextColor(ContextCompat.getColor(this, R.color.green))
     }
+
+    private fun deleteAccount() {
+        // Get the user's phone number from SharedPreferences
+        val phoneNumber = sharedPreferences.getString("phoneNumber", "")
+
+        // Check if the phone number is not empty
+        if (!phoneNumber.isNullOrEmpty()) {
+            // Delete the user's data from the Realtime Database
+            val usersRef = FirebaseDatabase.getInstance().getReference("users")
+            usersRef.child(phoneNumber).removeValue()
+
+            // Reset login state
+            sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
+
+            // Redirect to LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish() // Optional: Close the MainActivity to prevent going back
+        }
+    }
+
 
 }
 
