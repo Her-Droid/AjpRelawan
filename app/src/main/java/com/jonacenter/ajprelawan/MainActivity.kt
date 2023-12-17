@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.google.firebase.database.FirebaseDatabase
+import com.jonacenter.ajprelawan.api.Config
 import com.jonacenter.ajprelawan.auth.LoginActivity
+import com.jonacenter.ajprelawan.viewRelawan.DeleteDataActivity
 import com.jonacenter.ajprelawan.viewRelawan.ManualActivity
 import com.jonacenter.ajprelawan.viewRelawan.ResultRelawanActivity
 import com.jonacenter.ajprelawan.viewRelawan.ScrapeActivity
@@ -35,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         // Inside MainActivity.onCreate()
 
         val btnDeleteDataRequest: AppCompatButton = findViewById(R.id.btnDeleteAccount)
-
+        btnDeleteDataRequest.setOnClickListener {
+            val intent = Intent(this, DeleteDataActivity::class.java)
+            startActivity(intent)
+        }
 
 
         sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)

@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Title TextView -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +26,8 @@
             android:textColor="@color/green"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <!-- You can add other custom views here if needed -->
 
     </androidx.appcompat.widget.Toolbar>
 

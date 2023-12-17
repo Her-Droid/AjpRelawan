@@ -11,22 +11,19 @@ import androidx.appcompat.widget.Toolbar
 import com.jonacenter.ajprelawan.R
 import com.jonacenter.ajprelawan.api.Config
 
-class WebViewActivity : AppCompatActivity() {
+class DeleteDataActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
-
+        setContentView(R.layout.activity_delete_data)
+        webView = findViewById(R.id.webView)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-        webView = findViewById(R.id.webView)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        // Set the title for the Toolbar
-        supportActionBar?.title = "Kebijakan Privasi"
+        supportActionBar?.title = "Pengajuan Delete Data"
 
         // Enable JavaScript (optional)
         val webSettings: WebSettings = webView.settings
@@ -41,7 +38,7 @@ class WebViewActivity : AppCompatActivity() {
         webView.webChromeClient = WebChromeClient()
 
         // Load the URL in the WebView
-        val url = Config.kebijakanPrivasi
+        val url = Config.pengajuan
         webView.loadUrl(url)
     }
 

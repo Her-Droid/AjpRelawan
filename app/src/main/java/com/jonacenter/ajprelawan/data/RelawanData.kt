@@ -1,14 +1,13 @@
 package com.jonacenter.ajprelawan.data
 
-data class AddDataRequest(
-    val nik: Int,
-    val nama: String,
+data class RelawanData(
+    val id: Int,
+    val nik: Long,
     val nama_relawan: String,
     val koordinator: String,
     val tandeman: String,
-    val notelp: Int,
+    val notelp: Long,
     val no_tps: Int,
     val kecamatan: String,
     val kabupaten: String
 )
-

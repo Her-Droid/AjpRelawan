@@ -1,13 +1,8 @@
 package com.jonacenter.ajprelawan.data
 
-data class DptResponse(
+data class ApiResponse(
     val status: Boolean,
     val responseCode: String,
     val responseMessage: String,
-    val data: DptData?
+    val data: Any?
 )
-
-
-
-
-

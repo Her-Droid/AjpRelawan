@@ -334,8 +334,24 @@
                 app:layout_constraintTop_toBottomOf="@id/checkBoxLayout" />
 
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleSmall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

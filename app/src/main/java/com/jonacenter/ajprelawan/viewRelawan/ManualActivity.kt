@@ -1,14 +1,14 @@
 package com.jonacenter.ajprelawan.viewRelawan
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
+import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -17,9 +17,6 @@ import com.jonacenter.ajprelawan.R
 import com.jonacenter.ajprelawan.api.ApiService
 import com.jonacenter.ajprelawan.api.BaseDataInstance
 import com.jonacenter.ajprelawan.data.AddDataRequest
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +35,7 @@ class ManualActivity : AppCompatActivity() {
     private lateinit var edtKabupaten: EditText
     private lateinit var btnSubmitInput: AppCompatButton
     private lateinit var checkBox: CheckBox
+    private lateinit var progressBar: ProgressBar
     private val apiService = BaseDataInstance.getBaseInstance().create(ApiService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +51,11 @@ class ManualActivity : AppCompatActivity() {
         edtNumberPhone = findViewById(R.id.edtNumberPhone)
         edtKecamatan = findViewById(R.id.edtKecamatan)
         edtKabupaten = findViewById(R.id.edtKabupatenKota)
+        progressBar = findViewById(R.id.progressBar)
         checkBox = findViewById(R.id.checkBox)
+        checkBox.setOnCheckedChangeListener{
+                _, _ -> setButtonState()
+        }
         btnSubmitInput = findViewById(R.id.btnInputManual)
 
         edtNik.filters = arrayOf(InputFilter.LengthFilter(18))
@@ -87,7 +89,7 @@ class ManualActivity : AppCompatActivity() {
                 // Check if the entered number starts with '0'
                 if (!s.isNullOrEmpty() && s[0] != '0') {
                     // Show a toast message
-                    Toast.makeText(applicationContext, "Masukkan nomor handphone dengan benar", Toast.LENGTH_SHORT).show()
+                    showToast("Masukkan nomor handphone dengan benar (diawali dengan 08 atau 06)")
 
                     // Optionally clear the input
                     // edtNumberPhone.text.clear()
@@ -130,6 +132,7 @@ class ManualActivity : AppCompatActivity() {
         btnSubmit()
     }
 
+
     private fun setButtonState() {
         // Check if all specified EditTexts are not empty
         val isAllFieldsNotEmpty =
@@ -154,9 +157,13 @@ class ManualActivity : AppCompatActivity() {
 
         // Set background drawable and text color based on the conditions
         val backgroundDrawable =
-            if (isAllFieldsNotEmpty && isPhoneNumberValid && isCheckBoxChecked) {
+            if (isAllFieldsNotEmpty && isPhoneNumberValid) {
                 btnSubmitInput.setTextColor(ContextCompat.getColor(this, textColorResId))
-                R.drawable.button_background_true
+                if (isCheckBoxChecked) {
+                    R.drawable.button_background_true
+                } else {
+                    R.drawable.button_background_false
+                }
             } else {
                 btnSubmitInput.setTextColor(ContextCompat.getColor(this, textColorResId))
                 R.drawable.button_background_false
@@ -187,12 +194,13 @@ class ManualActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val nik = edtNik.text.toString()
+            val nik = edtNik.text.toString().toIntOrNull() ?: 0
             val namaRelawan = edtNameRelawan.text.toString()
+            val nama = edtName.text.toString()
             val koordinator = edtNameKoordinator.text.toString()
             val tandeman = edtNameTandeman.text.toString()
-            val notelp = edtNumberPhone.text.toString()
-            val noTps = edtNumberTps.text.toString()
+            val notelp = edtNumberPhone.text.toString().toIntOrNull() ?: 0
+            val noTps = edtNumberTps.text.toString().toIntOrNull() ?: 0
             val kecamatan = edtKecamatan.text.toString()
             val kabupaten = edtKabupaten.text.toString()
 
@@ -200,6 +208,7 @@ class ManualActivity : AppCompatActivity() {
 
             val requestData = AddDataRequest(
                 nik,
+                nama,
                 namaRelawan,
                 koordinator,
                 tandeman,
@@ -209,32 +218,36 @@ class ManualActivity : AppCompatActivity() {
                 kabupaten
             )
 
-
+            progressBar.visibility = View.VISIBLE
 
             // Make the API call using Retrofit
             try {
                 val call = apiService.postAddData(requestData)
                 call.enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                        // Hide the progress bar
+                        progressBar.visibility = View.GONE
+
                         // Handle the response if needed
                         if (response.isSuccessful) {
-                            // If successful, navigate to the ResultRelawanActivity
-                            val intent =
-                                Intent(this@ManualActivity, ResultRelawanActivity::class.java)
+                            // If successful, show a Toast message and navigate to the ResultRelawanActivity
+                            showToast("Berhasil Input Data")
+                            val intent = Intent(this@ManualActivity, ResultRelawanActivity::class.java)
                             startActivity(intent)
                         } else {
                             showToast("Gagal mengirim data. Response server: ${response.code()}")
                         }
                     }
-
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         // Handle failure
+                        progressBar.visibility = View.GONE
                         showToast("Error: ${t.message}")
                     }
                 })
             } catch (e: Exception) {
                 // Handle exception if the request fails
                 showToast("Error: ${e.message}")
+                progressBar.visibility = View.GONE
             }
         }
     }

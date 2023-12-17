@@ -20,7 +20,7 @@ object CekDptInstance {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(ChuckerInterceptor(MyApplication.getContext()!!))
+//            .addInterceptor(ChuckerInterceptor(MyApplication.getContext()!!))
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)

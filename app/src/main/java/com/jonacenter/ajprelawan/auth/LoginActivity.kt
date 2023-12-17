@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private var btnLogin: Button? = null
     private var database: DatabaseReference? = null
     private var progressBar: ProgressBar? = null
+
     // Inside your LoginActivity class
     private var checkBoxPrivacyPolicy: CheckBox? = null
     private var tvPrivacyPolicy: TextView? = null
@@ -60,8 +61,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-                // Set click listener for Privacy Policy TextView
-                tvPrivacyPolicy?.setOnClickListener {
+        // Set click listener for Privacy Policy TextView
+        tvPrivacyPolicy?.setOnClickListener {
             // Launch WebViewActivity when the Privacy Policy is clicked
             val webViewIntent = Intent(applicationContext, WebViewActivity::class.java)
             startActivity(webViewIntent)
@@ -89,9 +90,17 @@ class LoginActivity : AppCompatActivity() {
 
             if (username.isEmpty() || password.isEmpty()) {
                 if (username.isEmpty()) {
-                    Toast.makeText(applicationContext, "Masukkan Username/Nomor Telephone Anda!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Masukkan Username/Nomor Telephone Anda!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(applicationContext, "Masukkan Password Anda!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Masukkan Password Anda!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 // Hide the progress bar when username or password is empty
                 progressBar?.visibility = View.GONE
@@ -116,11 +125,11 @@ class LoginActivity : AppCompatActivity() {
                 database!!.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.child(username).exists()) {
-                            if (snapshot.child(username).child("password").getValue(String::class.java) == password) {
+                            if (snapshot.child(username).child("password")
+                                    .getValue(String::class.java) == password
+                            ) {
                                 btnLogin?.setBackgroundResource(R.drawable.button_background_true)
-                                btnLogin?.setTextColor(ContextCompat.getColor(this@LoginActivity,
-                                    R.color.white
-                                ))
+                                btnLogin?.setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
 
                                 Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT).show()
                                 // Save login state
@@ -138,9 +147,12 @@ class LoginActivity : AppCompatActivity() {
                                 progressBar?.visibility = View.GONE
                                 // Set background to button_background_false and textColor to white
                                 btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-                                btnLogin?.setTextColor(ContextCompat.getColor(this@LoginActivity,
-                                    R.color.green
-                                ))
+                                btnLogin?.setTextColor(
+                                    ContextCompat.getColor(
+                                        this@LoginActivity,
+                                        R.color.green
+                                    )
+                                )
                             }
                         } else {
                             // Username is incorrect
@@ -150,9 +162,12 @@ class LoginActivity : AppCompatActivity() {
                             progressBar?.visibility = View.GONE
                             // Set background to button_background_false and textColor to white
                             btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-                            btnLogin?.setTextColor(ContextCompat.getColor(this@LoginActivity,
-                                R.color.green
-                            ))
+                            btnLogin?.setTextColor(
+                                ContextCompat.getColor(
+                                    this@LoginActivity,
+                                    R.color.green
+                                )
+                            )
                         }
                     }
 
@@ -163,7 +178,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 }

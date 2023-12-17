@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-`q
+
     <queries>
         <package android:name="com.whatsapp" />
     </queries>
@@ -27,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".viewRelawan.DeleteDataActivity"
+            android:exported="false" />
         <activity
             android:name=".viewRelawan.WebViewActivity"
             android:exported="false" />
