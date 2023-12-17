@@ -3,9 +3,11 @@ package com.jonacenter.ajprelawan
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.jonacenter.ajprelawan.auth.LoginActivity
@@ -68,7 +70,27 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ResultRelawanActivity::class.java)
             startActivity(intent)
         }
+        val btnHelpDesk: AppCompatButton = findViewById(R.id.btnHelpDesk)
+
+        btnHelpDesk.setOnClickListener {
+            openWhatsAppChat("82258821877")
+        }
     }
+    private fun openWhatsAppChat(phoneNumber: String) {
+        val whatsappIntent = Intent(Intent.ACTION_VIEW)
+        val phoneWithCountryCode = "+62$phoneNumber" // Set the country code to +62
+
+        // Use Uri.parse with the "smsto" scheme and the phone number
+        whatsappIntent.data = Uri.parse("smsto:$phoneWithCountryCode")
+
+        // Check if there's a package that can handle this intent (WhatsApp)
+        if (whatsappIntent.resolveActivity(packageManager) != null) {
+            startActivity(whatsappIntent)
+        } else {
+            Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun onButtonClicked(button: AppCompatButton) {
         // Reset all buttons to default state
