@@ -34,7 +34,7 @@
             android:name=".viewRelawan.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".viewRelawan.ResultRelawanActivity"
+            android:name=".viewRelawan.resultRelawan.ResultRelawanActivity"
             android:exported="false" />
         <activity
             android:name=".viewRelawan.ManualActivity"

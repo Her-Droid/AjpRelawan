@@ -12,6 +12,7 @@ import com.jonacenter.ajprelawan.api.CekDptInstance
 import com.jonacenter.ajprelawan.data.AddDataRequest
 import com.jonacenter.ajprelawan.data.ApiResponse
 import com.jonacenter.ajprelawan.data.CheckDataResponse
+import com.jonacenter.ajprelawan.viewRelawan.resultRelawan.ResultRelawanActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

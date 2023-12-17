@@ -1,4 +1,4 @@
-package com.jonacenter.ajprelawan.viewRelawan
+package com.jonacenter.ajprelawan.viewRelawan.resultRelawan
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.jonacenter.ajprelawan.MainActivity
 import com.jonacenter.ajprelawan.R
-import com.jonacenter.ajprelawan.adapter.ResultRelawanAdapter
+import com.jonacenter.ajprelawan.viewRelawan.resultRelawan.adapter.ResultRelawanAdapter
 import com.jonacenter.ajprelawan.data.RelawanData
 
 class ResultRelawanActivity : AppCompatActivity() {

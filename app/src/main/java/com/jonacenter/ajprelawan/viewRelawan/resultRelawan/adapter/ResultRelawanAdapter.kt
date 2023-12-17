@@ -1,4 +1,4 @@
-package com.jonacenter.ajprelawan.adapter
+package com.jonacenter.ajprelawan.viewRelawan.resultRelawan.adapter
 
 import android.view.LayoutInflater
 import android.view.View
