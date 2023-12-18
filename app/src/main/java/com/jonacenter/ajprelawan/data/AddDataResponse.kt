@@ -8,7 +8,7 @@ data class AddDataResponse(
 	val koordinator: String? = null,
 
 	@field:SerializedName("nik")
-	val nik: Int? = null,
+	val nik: String? = null,
 
 	@field:SerializedName("notelp")
 	val notelp: Int? = null,
@@ -17,7 +17,7 @@ data class AddDataResponse(
 	val tandeman: String? = null,
 
 	@field:SerializedName("no_tps")
-	val noTps: Int? = null,
+	val noTps: String? = null,
 
 	@field:SerializedName("kecamatan")
 	val kecamatan: Int? = null,
@@ -27,7 +27,6 @@ data class AddDataResponse(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,
-
 
 	@field:SerializedName("kabupaten")
 	val kabupaten: Int? = null

@@ -47,7 +47,6 @@ class ResultRelawanAdapter(private val relawanList: List<RelawanData>) :
 
         fun bind(relawanData: RelawanData) {
             tvNumberTps.text = "No Tps: ${relawanData.no_tps}"
-//            tvNumberTps.text = relawanData.no_tps.toString()
             tvName.text = relawanData.nama
             tvIdCard.text = relawanData.nik.toString()
             tvNumberPhone.text = relawanData.notelp.toString()

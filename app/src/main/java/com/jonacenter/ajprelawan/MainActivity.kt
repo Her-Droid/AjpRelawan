@@ -13,9 +13,9 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.database.FirebaseDatabase
 import com.jonacenter.ajprelawan.auth.LoginActivity
 import com.jonacenter.ajprelawan.viewRelawan.DeleteDataActivity
-import com.jonacenter.ajprelawan.viewRelawan.ManualActivity
+import com.jonacenter.ajprelawan.viewRelawan.manual.ManualActivity
 import com.jonacenter.ajprelawan.viewRelawan.resultRelawan.ResultRelawanActivity
-import com.jonacenter.ajprelawan.viewRelawan.ScrapeActivity
+import com.jonacenter.ajprelawan.viewRelawan.scrape.ScrapeActivity
 
 class MainActivity : AppCompatActivity() {
 

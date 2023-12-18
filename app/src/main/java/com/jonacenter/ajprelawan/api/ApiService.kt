@@ -20,14 +20,9 @@ interface ApiService {
     suspend fun checkDataDpt(@Query("nik") nik: String): Response<CheckDataResponse>
 
     @POST(addData)
-    suspend fun addData(@Body requestData: AddDataRequest): Response<ApiResponse>
-
-    @POST(addData)
-    fun postAddData(@Body requestData: AddDataRequest): Call<ResponseBody>
+    fun postAddData(@Body requestData: AddDataRequest): Call<ApiResponse>
 
     @GET(getData)
-    suspend fun getData(@Query("nik") nik: Long?): List<RelawanData>
-
-    suspend fun getAllData(): List<RelawanData>
+    fun getResultRelawanData(): Call<List<RelawanData>>
 }
 

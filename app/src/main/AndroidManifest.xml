@@ -37,10 +37,10 @@
             android:name=".viewRelawan.resultRelawan.ResultRelawanActivity"
             android:exported="false" />
         <activity
-            android:name=".viewRelawan.ManualActivity"
+            android:name=".viewRelawan.manual.ManualActivity"
             android:exported="false" />
         <activity
-            android:name=".viewRelawan.ScrapeActivity"
+            android:name=".viewRelawan.scrape.ScrapeActivity"
             android:exported="false" />
         <activity
             android:name=".auth.RegisterActivity"

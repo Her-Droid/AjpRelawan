@@ -15,11 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jonacenter.ajprelawan.MainActivity
 import com.jonacenter.ajprelawan.R
+import com.jonacenter.ajprelawan.data.RelawanData
 import com.jonacenter.ajprelawan.viewRelawan.resultRelawan.adapter.ResultRelawanAdapter
 
-class ResultRelawanActivity : AppCompatActivity() {
+class ResultRelawanActivity : AppCompatActivity(), ResultRelawanContract.View {
 
-    private val viewModel by viewModels<RelawanViewModel>()
+    private val presenter: ResultRelawanContract.Presenter by lazy {
+        ResultRelawanPresenter(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
@@ -43,29 +47,10 @@ class ResultRelawanActivity : AppCompatActivity() {
         val totalCountTextView: TextView = findViewById(R.id.totalCountTextView)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
-        // Observe total count changes
-        viewModel.totalCount.observe(this, Observer<Int> { totalCount ->
-            totalCountTextView.text = "Total Relawan: $totalCount"
-        })
-
-        viewModel.relawanData.observe(this) { data ->
-            // Reverse the order of the data before updating the RecyclerView adapter
-            val reversedData = data.reversed()
-
-            // Update RecyclerView adapter with the reversed data
-            val adapter = ResultRelawanAdapter(reversedData)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.itemAnimator = DefaultItemAnimator()
-            recyclerView.setHasFixedSize(true)
-        }
-
-
         // Fetch data (you may pass a specific nik for searching)
-        viewModel.fetchData()
+        presenter.fetchData()
 
         val searchEditText: EditText = findViewById(R.id.searchEditText)
-        // Observe changes in the searchEditText
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Do nothing
@@ -73,16 +58,14 @@ class ResultRelawanActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // Fetch data based on the search query
-                viewModel.fetchData(s.toString().toLongOrNull())
+                presenter.searchByNik(s.toString().toLongOrNull())
             }
 
             override fun afterTextChanged(s: Editable?) {
                 // Do nothing
             }
         })
-
     }
-
 
     // Handle the back button press
     override fun onBackPressed() {
@@ -96,4 +79,20 @@ class ResultRelawanActivity : AppCompatActivity() {
         startActivity(intent)
         finish() // Optionally finish the current activity
     }
+
+    override fun showTotalCount(totalCount: Int) {
+        val totalCountTextView: TextView = findViewById(R.id.totalCountTextView)
+        totalCountTextView.text = "Total Relawan: $totalCount"
+    }
+
+    override fun showRelawanData(data: List<RelawanData>) {
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        val reversedData = data.reversed()
+        val adapter = ResultRelawanAdapter(reversedData)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.setHasFixedSize(true)
+    }
 }
+

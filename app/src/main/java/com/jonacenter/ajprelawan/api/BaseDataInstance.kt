@@ -11,16 +11,21 @@ import java.util.concurrent.TimeUnit
 
 object BaseDataInstance {
 
-    fun getBaseInstance() : Retrofit {
+    fun getBaseInstance(): Retrofit {
         val gson = GsonBuilder()
             .setLenient()
             .create()
         val interceptor = HttpLoggingInterceptor()
-
+        interceptor.level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-//            .addInterceptor(ChuckerInterceptor(MyApplication.getContext()!!))
+            // Uncomment the line below to add ChuckerInterceptor
+             .addInterceptor(ChuckerInterceptor(MyApplication.getContext()!!))
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
