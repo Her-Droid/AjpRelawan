@@ -24,5 +24,6 @@ interface ApiService {
 
     @GET(getData)
     fun getResultRelawanData(): Call<List<RelawanData>>
+
 }
 

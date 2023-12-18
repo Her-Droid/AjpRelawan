@@ -2,6 +2,7 @@ package com.jonacenter.ajprelawan.api
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
+import com.jonacenter.ajprelawan.BuildConfig
 import com.jonacenter.ajprelawan.MyApplication
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

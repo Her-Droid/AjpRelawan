@@ -8,19 +8,19 @@ class MyApplication : MultiDexApplication() {
     companion object {
         private var instance: MyApplication? = null
 
-        fun getInstance(): MyApplication? {
-            return instance
+        fun getInstance(): MyApplication {
+            return instance ?: throw IllegalStateException("Application instance is null")
         }
 
-        fun getContext(): Context? {
-            return instance
+        fun getContext(): Context {
+            return instance?.applicationContext
+                ?: throw IllegalStateException("Application context is null")
         }
     }
 
     override fun onCreate() {
-        instance = this
-
         super.onCreate()
+        instance = this
     }
 }
 
