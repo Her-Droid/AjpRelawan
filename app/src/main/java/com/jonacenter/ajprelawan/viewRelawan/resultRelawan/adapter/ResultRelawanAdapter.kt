@@ -39,9 +39,16 @@ class ResultRelawanAdapter(private val relawanList: List<RelawanData>) :
         private val tvNameKoordinator: TextView = itemView.findViewById(R.id.tvNameKoordinator)
         private val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
 
+        init {
+            // Set an initial state when the ViewHolder is created
+            checkBox.isChecked = true
+            checkBox.isEnabled = false
+        }
+
         fun bind(relawanData: RelawanData) {
-            tvNumberTps.text = relawanData.no_tps.toString()
-            tvName.text = relawanData.nama_relawan
+            tvNumberTps.text = "No Tps: ${relawanData.no_tps}"
+//            tvNumberTps.text = relawanData.no_tps.toString()
+            tvName.text = relawanData.nama
             tvIdCard.text = relawanData.nik.toString()
             tvNumberPhone.text = relawanData.notelp.toString()
             tvKabupatenKota.text = relawanData.kabupaten
@@ -49,9 +56,17 @@ class ResultRelawanAdapter(private val relawanList: List<RelawanData>) :
             tvNameRelawan.text = relawanData.nama_relawan
             tvNameTandeman.text = relawanData.tandeman
             tvNameKoordinator.text = relawanData.koordinator
-            checkBox.isChecked = false  // Set the initial state as needed
 
-            // You can add more logic here if needed
+            // Set a click listener for the CheckBox
+            checkBox.setOnClickListener {
+                // Update the state based on CheckBox click
+                checkBox.isChecked = !checkBox.isChecked
+                // You can add more logic here if needed
+
+                // If checked, disable the CheckBox; if unchecked, enable it
+                checkBox.isEnabled = !checkBox.isChecked
+            }
         }
     }
+
 }

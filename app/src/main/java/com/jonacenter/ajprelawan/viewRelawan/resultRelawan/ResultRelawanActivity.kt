@@ -1,17 +1,21 @@
 package com.jonacenter.ajprelawan.viewRelawan.resultRelawan
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jonacenter.ajprelawan.MainActivity
 import com.jonacenter.ajprelawan.R
 import com.jonacenter.ajprelawan.viewRelawan.resultRelawan.adapter.ResultRelawanAdapter
-import com.jonacenter.ajprelawan.data.RelawanData
 
 class ResultRelawanActivity : AppCompatActivity() {
 
@@ -44,16 +48,39 @@ class ResultRelawanActivity : AppCompatActivity() {
             totalCountTextView.text = "Total Relawan: $totalCount"
         })
 
-        // Observe data changes
-        viewModel.relawanData.observe(this, Observer<List<RelawanData>> { data ->
-            // Update RecyclerView adapter with the new data
-            val adapter = ResultRelawanAdapter(data)
+        viewModel.relawanData.observe(this) { data ->
+            // Reverse the order of the data before updating the RecyclerView adapter
+            val reversedData = data.reversed()
+
+            // Update RecyclerView adapter with the reversed data
+            val adapter = ResultRelawanAdapter(reversedData)
             recyclerView.adapter = adapter
-        })
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.itemAnimator = DefaultItemAnimator()
+            recyclerView.setHasFixedSize(true)
+        }
 
 
         // Fetch data (you may pass a specific nik for searching)
         viewModel.fetchData()
+
+        val searchEditText: EditText = findViewById(R.id.searchEditText)
+        // Observe changes in the searchEditText
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Fetch data based on the search query
+                viewModel.fetchData(s.toString().toLongOrNull())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Do nothing
+            }
+        })
+
     }
 
 

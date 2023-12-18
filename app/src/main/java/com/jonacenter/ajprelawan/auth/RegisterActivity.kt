@@ -27,7 +27,6 @@ class RegisterActivity : AppCompatActivity() {
     private var database: DatabaseReference? = null
     private var btnLogin: TextView? = null
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -67,14 +66,8 @@ class RegisterActivity : AppCompatActivity() {
 
             if (numberPhone.isEmpty() || name.isEmpty() || password.isEmpty()) {
                 // Set background to button_background_false and textColor to white if any field is empty
-                btnRegister?.setBackgroundResource(R.drawable.button_background_false)
-                btnRegister?.setTextColor(ContextCompat.getColor(this, R.color.green))
                 Toast.makeText(applicationContext, "Ada Data Yang Masih Kosong!!", Toast.LENGTH_SHORT).show()
             } else {
-                // Set background to button_background_true and textColor to green if all fields are filled
-                btnRegister?.setBackgroundResource(R.drawable.button_background_true)
-                btnRegister?.setTextColor(ContextCompat.getColor(this, R.color.white))
-
                 // Check for individual character limits
                 if (numberPhone.length > 15 || name.length > 15 || password.length > 15) {
                     Toast.makeText(applicationContext, "Batas Maksimal 15 Karakter untuk Nomor HP, Nama, dan Password!", Toast.LENGTH_SHORT).show()

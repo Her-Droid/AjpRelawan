@@ -25,6 +25,10 @@ data class AddDataResponse(
 	@field:SerializedName("nama_relawan")
 	val namaRelawan: String? = null,
 
+	@field:SerializedName("nama")
+	val nama: String? = null,
+
+
 	@field:SerializedName("kabupaten")
 	val kabupaten: Int? = null
 )

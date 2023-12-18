@@ -16,19 +16,18 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET(Config.cekDataDpt)
+    @GET(cekDataDpt)
     suspend fun checkDataDpt(@Query("nik") nik: String): Response<CheckDataResponse>
 
-    @POST(Config.addData)
+    @POST(addData)
     suspend fun addData(@Body requestData: AddDataRequest): Response<ApiResponse>
-
 
     @POST(addData)
     fun postAddData(@Body requestData: AddDataRequest): Call<ResponseBody>
 
-    @GET("getData")
+    @GET(getData)
     suspend fun getData(@Query("nik") nik: Long?): List<RelawanData>
 
-
+    suspend fun getAllData(): List<RelawanData>
 }
 

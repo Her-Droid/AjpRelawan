@@ -77,17 +77,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun btnLogin() {
-        // Set default background and text color
-        btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-        btnLogin?.setTextColor(ContextCompat.getColor(this, R.color.green))
 
         btnLogin?.setOnClickListener {
             val username = etUsername?.text.toString()
             val password = etPassword?.text.toString()
             database = FirebaseDatabase.getInstance().getReference("users")
-
             progressBar?.visibility = View.VISIBLE
-
             if (username.isEmpty() || password.isEmpty()) {
                 if (username.isEmpty()) {
                     Toast.makeText(
@@ -104,9 +99,6 @@ class LoginActivity : AppCompatActivity() {
                 }
                 // Hide the progress bar when username or password is empty
                 progressBar?.visibility = View.GONE
-                // Set background to button_background_false and textColor to white
-                btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-                btnLogin?.setTextColor(ContextCompat.getColor(this, R.color.green))
             } else {
                 // Check if the Privacy Policy checkbox is checked
                 if (!checkBoxPrivacyPolicy?.isChecked!!) {
@@ -128,8 +120,6 @@ class LoginActivity : AppCompatActivity() {
                             if (snapshot.child(username).child("password")
                                     .getValue(String::class.java) == password
                             ) {
-                                btnLogin?.setBackgroundResource(R.drawable.button_background_true)
-                                btnLogin?.setTextColor(ContextCompat.getColor(this@LoginActivity, R.color.white))
 
                                 Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT).show()
                                 // Save login state
@@ -146,13 +136,6 @@ class LoginActivity : AppCompatActivity() {
                                 // Hide the progress bar when password is incorrect
                                 progressBar?.visibility = View.GONE
                                 // Set background to button_background_false and textColor to white
-                                btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-                                btnLogin?.setTextColor(
-                                    ContextCompat.getColor(
-                                        this@LoginActivity,
-                                        R.color.green
-                                    )
-                                )
                             }
                         } else {
                             // Username is incorrect
@@ -160,14 +143,7 @@ class LoginActivity : AppCompatActivity() {
                                 .show()
                             // Hide the progress bar when username is incorrect
                             progressBar?.visibility = View.GONE
-                            // Set background to button_background_false and textColor to white
-                            btnLogin?.setBackgroundResource(R.drawable.button_background_false)
-                            btnLogin?.setTextColor(
-                                ContextCompat.getColor(
-                                    this@LoginActivity,
-                                    R.color.green
-                                )
-                            )
+
                         }
                     }
 

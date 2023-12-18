@@ -180,7 +180,7 @@ class ManualActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             // Check if any EditText is empty
-            if (listOf(edtNik, edtNameRelawan, edtNameKoordinator, edtNameTandeman, edtNumberPhone, edtNumberTps, edtKecamatan, edtKabupaten)
+            if (listOf(edtNik, edtName, edtNameRelawan, edtNameKoordinator, edtNameTandeman, edtNumberPhone, edtNumberTps, edtKecamatan, edtKabupaten)
                     .any { it.text.toString().isEmpty() }
             ) {
                 showToast("Semua kolom harus diisi")
